@@ -7,6 +7,8 @@ const content = {
 const elements = {
     searchInput: document.querySelector('#search-input'),
     searchButton: document.querySelector('#search-button'),
+    contentContainer: document.querySelector('#content'),
+    favouritesContainer: document.querySelector('#favourites'),
 };
 
 function binders() {
@@ -35,9 +37,96 @@ function getBooks() {
         }));
     })
     .catch(error => console.error('Error:', error)).finally(() => {
-        console.log(content.books);
+        renderBooks();
     });
 
+}
+
+function renderBooks() {
+    const container = elements.contentContainer;
+    container.innerHTML = '';
+
+    content.books.forEach(book => {
+        const bookElement = bookcardfactory(book.title, book.author, book.first_publish_year, book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : null);
+        container.appendChild(bookElement);
+    });
+}
+
+function addToFavourites(title, author, cover) {
+    const favouriteElement = favouritescardfactory(title, author, cover);
+    elements.favouritesContainer.appendChild(favouriteElement);
+}
+
+function removeFromFavourites(event) {
+    event.target.parentElement.remove();
+}
+
+function favouritescardfactory(title, author, cover) {
+
+    const favouritecontainer = document.createElement('li');
+    const favouriteElement = document.createElement('article');
+    const favouritecontentcontainer = document.createElement('div');
+    const favouriteRemoveButton = document.createElement('button');
+    const favouritesubcontentcontainer = document.createElement('div');
+    const favouriteImage = document.createElement('img');
+    const favouriteTitle = document.createElement('h3');
+    const favouriteAuthor = document.createElement('p');
+
+    favouriteElement.className = 'flex justify-between items-center gap-1 p-1 border';
+    favouriteRemoveButton.className = 'bg-gray-500 size-5 text-white p-1 active:scale-95';
+    favouritecontentcontainer.className = 'flex gap-1';
+    favouriteImage.className = 'size-10 object-cover';
+    favouriteTitle.className = 'text-sm';
+    favouriteAuthor.className = 'text-xs';
+
+    favouriteRemoveButton.addEventListener('click', removeFromFavourites);
+
+    favouriteTitle.textContent = title;
+    favouriteAuthor.textContent = author;
+    favouriteImage.src = cover || './src/assets/No_Image.jpg';
+
+    favouritesubcontentcontainer.appendChild(favouriteTitle);
+    favouritesubcontentcontainer.appendChild(favouriteAuthor);
+    favouritecontentcontainer.appendChild(favouriteImage);
+    favouritecontentcontainer.appendChild(favouritesubcontentcontainer);
+    favouriteElement.appendChild(favouritecontentcontainer);
+    favouriteElement.appendChild(favouriteRemoveButton);
+    favouritecontainer.appendChild(favouriteElement);
+
+    return favouritecontainer;
+}
+
+
+function bookcardfactory(title, author, year, cover) {
+    const bookElement = document.createElement('article');
+    const favouriteButton = document.createElement('button');
+    const bookImage = document.createElement('img');
+    const bookTitle = document.createElement('h3');
+    const bookAuthor = document.createElement('p');
+    const bookYear = document.createElement('span');
+
+    bookElement.className = 'border relative p-2 flex flex-col gap-1';
+    favouriteButton.className = 'absolute top-1 right-1 bg-gray-500 text-white p-1 active:scale-95';
+    bookImage.className = 'w-full h-3/4 object-cover border';
+    bookTitle.className = 'text-sm';
+    bookAuthor.className = 'text-xs';
+    bookYear.className = 'text-xs text-gray-500';
+
+    favouriteButton.addEventListener('click', () => addToFavourites(title, author, cover));
+
+    bookTitle.textContent = title;
+    bookAuthor.textContent = author;
+    bookYear.textContent = `, (${year})`;
+    bookImage.src = cover || './src/assets/No_Image.jpg';
+    favouriteButton.textContent = '+';
+
+    bookElement.appendChild(bookImage);
+    bookElement.appendChild(bookTitle);
+    bookElement.appendChild(bookAuthor);
+    bookAuthor.appendChild(bookYear);
+    bookElement.appendChild(favouriteButton);
+
+    return bookElement;
 }
 
 function init() {
