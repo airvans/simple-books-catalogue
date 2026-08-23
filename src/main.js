@@ -1,4 +1,8 @@
 
+const content = {
+    books: [],
+    favourites: [],
+}
 
 const elements = {
     searchInput: document.querySelector('#search-input'),
@@ -18,16 +22,21 @@ function getBooks() {
 
     const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(value)}&limit=10`;
 
-    const headers = new Headers({
-        "User-Agent": "simple-books-catalog/1.0 (evan.della24@gmail.com)"
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        let base = Array.isArray(data.docs) ? data.docs : [];
+
+        content.books = base.map(book => ({
+            title: book.title || 'Unknown Title',
+            author: Array.isArray(book.author_name) ? book.author_name.join(', ') : 'Unknown Author',
+            first_publish_year: book.first_publish_year || 'Unknown Year',
+            cover_id: book.cover_i || null,
+        }));
+    })
+    .catch(error => console.error('Error:', error)).finally(() => {
+        console.log(content.books);
     });
-
-    const options = {
-        method: 'GET',
-        headers: headers
-    };
-
-
 
 }
 
