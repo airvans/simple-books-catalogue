@@ -66,29 +66,31 @@ function renderBooks() {
 function loadFavourites() {
     content.favourites = JSON.parse(localStorage.getItem('favourites')) || [];
     content.favourites.forEach(fav => {
-        const favouriteElement = favouritescardfactory(fav.title, fav.author, fav.cover);
+        const favouriteElement = favouritescardfactory(fav.id, fav.title, fav.author, fav.cover);
         elements.favouritesContainer.appendChild(favouriteElement);
     });
 }
 
-function addToFavourites(title, author, cover) {
+function addToFavourites(id, title, author, cover) {
 
-    content.favourites.push({ title, author, cover });
+    content.favourites.push({ id, title, author, cover });
     localStorage.setItem('favourites', JSON.stringify(content.favourites));
 
-    const favouriteElement = favouritescardfactory(title, author, cover);
+    const favouriteElement = favouritescardfactory(id, title, author, cover);
     elements.favouritesContainer.appendChild(favouriteElement);
 }
 
 function removeFromFavourites(event) {
-    const title = event.target.parentElement.querySelector('h3').textContent;
-    content.favourites = content.favourites.filter(fav => fav.title !== title);
+
+    const id = event.target.parentElement.dataset.id;
+    console.log('Removing favourite with id:', id);
+    content.favourites = content.favourites.filter(fav => fav.id !== id);
     localStorage.setItem('favourites', JSON.stringify(content.favourites));
 
     event.target.parentElement.remove();
 }
 
-function favouritescardfactory(title, author, cover) {
+function favouritescardfactory(id,title, author, cover) {
 
     const favouritecontainer = document.createElement('li');
     const favouriteElement = document.createElement('article');
@@ -107,6 +109,7 @@ function favouritescardfactory(title, author, cover) {
     favouriteAuthor.className = 'text-xs';
 
     favouriteRemoveButton.addEventListener('click', removeFromFavourites);
+    favouriteElement.dataset.id = id;
 
     favouriteTitle.textContent = title;
     favouriteAuthor.textContent = author;
@@ -147,7 +150,9 @@ function bookcardfactory(title, author, year, cover) {
     bookAuthor.className = 'text-xs';
     bookYear.className = 'text-xs text-gray-500';
 
-    favouriteButton.addEventListener('click', () => addToFavourites(title, author, cover));
+    let id = self.crypto.randomUUID();
+
+    favouriteButton.addEventListener('click', () => addToFavourites(id, title, author, cover));
 
     bookTitle.textContent = title;
     bookAuthor.textContent = author;
