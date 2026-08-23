@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>simple-books-catalog</title>
+  </head>
+  <style>
+    #content{
+     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+     grid-auto-rows: 250px;
+    }
+  </style>
+  <body class="bg-gray-100">
+    <header class="w-full flex justify-between border p-2">
+      <div class="flex gap-2 border">
+        <img src="/logo.svg" alt="logo" class="size-6 bg-gray-500 rounded-md"/>
+        <h4 class="text-sm hidden md:block">bookcatalog</h4>
+      </div>
+      <div>
+        <input type="checkbox">
+      </div>
+    </header>
+    <main class="border">
+      <section>
+       <div class="text-center">
+        <h1>The Home of the greatest books</h1>
+        <h2>Your one-stop shop for all your reading needs</h2>
+       </div>
+       <div class="border border-red-400 p-1 flex gap-1 justify-center">
+        <input type="text" class="border  p-2 w-full max-w-150 " placeholder="Search for books...">
+        <button class="bg-gray-500 text-white p-2 active:scale-95">Search</button>
+       </div>
+      </section>
+      <section class="flex flex-col-reverse md:flex-row p-2 gap-1">
+        <section id="content" class="border w-full gap-2 grid md:gap-4">
+          <!-- <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300"></div> -->
+        </section>
+        <aside  class="border w-full h-fit max-w-100">
+          <h3>Favourites</h3>
+          <ul>
+            <li>Book 1</li>
+            <li>Book 2</li>
+            <li>Book 3</li>
+          </ul>
+        </aside>
+      </section>
+    </main>
+    <footer class="border p-2 text-center float-bottom">
+      <p>Copyright &copy; 2026</p>
+    </footer>
+  </body>
+</html>
