@@ -7,3 +7,8 @@
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
 }
+
+:root[data-theme="dark"] {
+  --text-primary: #eee;
+  --text-secondary: #aaa;
+}
