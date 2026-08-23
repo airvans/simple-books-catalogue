@@ -12,7 +12,18 @@ const elements = {
 };
 
 function binders() {
+
     elements.searchButton.addEventListener('click', getBooks);
+
+    const debouncedGetBooks = debounce(getBooks);
+
+
+    // elements.searchInput.addEventListener('input', (event) => {
+    //     console.log(event.target.value);
+    //     debouncedGetBooks();
+    //     console.log();
+
+    // })
 }
 
 
@@ -52,12 +63,28 @@ function renderBooks() {
     });
 }
 
+function loadFavourites() {
+    content.favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+    content.favourites.forEach(fav => {
+        const favouriteElement = favouritescardfactory(fav.title, fav.author, fav.cover);
+        elements.favouritesContainer.appendChild(favouriteElement);
+    });
+}
+
 function addToFavourites(title, author, cover) {
+
+    content.favourites.push({ title, author, cover });
+    localStorage.setItem('favourites', JSON.stringify(content.favourites));
+
     const favouriteElement = favouritescardfactory(title, author, cover);
     elements.favouritesContainer.appendChild(favouriteElement);
 }
 
 function removeFromFavourites(event) {
+    const title = event.target.parentElement.querySelector('h3').textContent;
+    content.favourites = content.favourites.filter(fav => fav.title !== title);
+    localStorage.setItem('favourites', JSON.stringify(content.favourites));
+
     event.target.parentElement.remove();
 }
 
@@ -96,6 +123,14 @@ function favouritescardfactory(title, author, cover) {
     return favouritecontainer;
 }
 
+function debounce(func, timeout = 300){
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
 
 function bookcardfactory(title, author, year, cover) {
     const bookElement = document.createElement('article');
@@ -131,6 +166,7 @@ function bookcardfactory(title, author, year, cover) {
 
 function init() {
     binders();
+    loadFavourites()
 }
 
 init();
