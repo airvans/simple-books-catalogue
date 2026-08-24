@@ -174,7 +174,7 @@ function favouritescardfactory(id,title, author, cover) {
     favouriteElement.className = 'favourite-card';
     favouritecontentcontainer.className = 'favouritecontentcontainer';
     favouriteIcon.className = 'favourite-icon';
-    favouriteIcon.src = './src/assets/bin.svg';
+    favouriteIcon.src = './bin.svg';
     favouriteIcon.alt = 'Remove from favourites';
 
     favouriteRemoveButton.addEventListener('click', removeFromFavourites);
@@ -217,9 +217,9 @@ function bookcardfactory(title, author, year, cover) {
     bookTitle.textContent = title;
     bookAuthor.textContent = author;
     bookYear.textContent = `, (${year})`;
-    bookImage.src = cover || './src/assets/No_Image.jpg';
+    bookImage.src = cover || './No_Image.jpg';
     favouriteIcon.className = 'favourite-icon';
-    favouriteIcon.src = './src/assets/heart.svg';
+    favouriteIcon.src = './heart.svg';
     favouriteIcon.alt = 'Add to favourites';
 
     bookElement.appendChild(bookImage);
