@@ -17,7 +17,10 @@
         <h4>bookcatalog</h4>
       </div>
       <div>
-        <input type="checkbox" id="theme-toggle" >
+        <label class="theme-toggle-lable" for="theme-toggle">
+            <img src="./src/assets/moon.svg" alt="moon icon">
+            <input type="checkbox" id="theme-toggle" >
+        </label>
       </div>
     </header>
     <main>
@@ -30,7 +33,7 @@
         <input type="text" id="search-input" class="" placeholder="Search for books...">
         <button id="search-button">
           <span class="search-word">Search</span>
-          <img src="./src/assets/search.svg" alt="" class="search-img">
+          <img src="./src/assets/search.svg" alt="search icon" class="search-img">
         </button>
        </div>
       </section>
@@ -51,9 +54,11 @@
           </article>
         </section>
         <aside>
-          <h3>Favourites</h3>
-          <ul id="favourites">
-          </ul>
+          <details>
+            <summary>Favourites</summary>
+            <ul id="favourites">
+            </ul>
+          </details>
         </aside>
       </section>
     </main>
