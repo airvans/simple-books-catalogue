@@ -109,12 +109,10 @@ function favouritescardfactory(id,title, author, cover) {
     const favouriteTitle = document.createElement('h3');
     const favouriteAuthor = document.createElement('p');
 
-    favouriteElement.className = 'flex justify-between items-center gap-1 p-1 border';
-    favouriteRemoveButton.className = 'bg-gray-500 size-5 text-white p-1 active:scale-95';
-    favouritecontentcontainer.className = 'flex gap-1';
-    favouriteImage.className = 'size-10 object-cover';
-    favouriteTitle.className = 'text-sm';
-    favouriteAuthor.className = 'text-xs';
+
+    favouriteElement.className = 'favourite-card';
+    favouritecontentcontainer.className = 'favouritecontentcontainer';
+    favouriteRemoveButton.textContent = '+';
 
     favouriteRemoveButton.addEventListener('click', removeFromFavourites);
     favouriteElement.dataset.id = id;
@@ -134,14 +132,6 @@ function favouritescardfactory(id,title, author, cover) {
     return favouritecontainer;
 }
 
-function debounce(func, timeout = 300){
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
-  };
-}
-
 
 function bookcardfactory(title, author, year, cover) {
     const bookElement = document.createElement('article');
@@ -151,12 +141,7 @@ function bookcardfactory(title, author, year, cover) {
     const bookAuthor = document.createElement('p');
     const bookYear = document.createElement('span');
 
-    bookElement.className = 'border relative p-2 flex flex-col gap-1';
-    favouriteButton.className = 'absolute top-1 right-1 bg-gray-500 text-white p-1 active:scale-95';
-    bookImage.className = 'w-full h-3/4 object-cover border';
-    bookTitle.className = 'text-sm';
-    bookAuthor.className = 'text-xs';
-    bookYear.className = 'text-xs text-gray-500';
+    bookElement.className = 'card';
 
     let id = self.crypto.randomUUID();
 
@@ -175,6 +160,14 @@ function bookcardfactory(title, author, year, cover) {
     bookElement.appendChild(favouriteButton);
 
     return bookElement;
+}
+
+function debounce(func, timeout = 300){
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
 }
 
 function init() {
