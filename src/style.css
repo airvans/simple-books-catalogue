@@ -90,7 +90,16 @@ li {
 }
 
 button {
-  padding: 0px;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
 }
 
 header div {
@@ -312,6 +321,13 @@ footer{
   width:100%;
   object-fit: cover;
   height: calc(3/4 * 100%)
+}
+
+.card .favourite-icon,
+.favourite-card .favourite-icon {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
 }
 
 #favourites{

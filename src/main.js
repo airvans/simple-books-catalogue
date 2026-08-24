@@ -108,11 +108,15 @@ function favouritescardfactory(id,title, author, cover) {
     const favouriteImage = document.createElement('img');
     const favouriteTitle = document.createElement('h3');
     const favouriteAuthor = document.createElement('p');
+    const favouriteIcon = document.createElement('img');
+
 
 
     favouriteElement.className = 'favourite-card';
     favouritecontentcontainer.className = 'favouritecontentcontainer';
-    favouriteRemoveButton.textContent = '+';
+    favouriteIcon.className = 'favourite-icon';
+    favouriteIcon.src = './src/assets/heart.svg';
+    favouriteIcon.alt = 'Remove from favourites';
 
     favouriteRemoveButton.addEventListener('click', removeFromFavourites);
     favouriteElement.dataset.id = id;
@@ -128,6 +132,8 @@ function favouritescardfactory(id,title, author, cover) {
     favouriteElement.appendChild(favouritecontentcontainer);
     favouriteElement.appendChild(favouriteRemoveButton);
     favouritecontainer.appendChild(favouriteElement);
+    favouriteRemoveButton.appendChild(favouriteIcon);
+
 
     return favouritecontainer;
 }
@@ -140,6 +146,8 @@ function bookcardfactory(title, author, year, cover) {
     const bookTitle = document.createElement('h3');
     const bookAuthor = document.createElement('p');
     const bookYear = document.createElement('span');
+    const favouriteIcon = document.createElement('img');
+
 
     bookElement.className = 'card';
 
@@ -151,13 +159,16 @@ function bookcardfactory(title, author, year, cover) {
     bookAuthor.textContent = author;
     bookYear.textContent = `, (${year})`;
     bookImage.src = cover || './src/assets/No_Image.jpg';
-    favouriteButton.textContent = '+';
+    favouriteIcon.className = 'favourite-icon';
+    favouriteIcon.src = './src/assets/heart.svg';
+    favouriteIcon.alt = 'Add to favourites';
 
     bookElement.appendChild(bookImage);
     bookElement.appendChild(bookTitle);
     bookElement.appendChild(bookAuthor);
     bookAuthor.appendChild(bookYear);
     bookElement.appendChild(favouriteButton);
+    favouriteButton.appendChild(favouriteIcon);
 
     return bookElement;
 }
