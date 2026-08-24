@@ -59,7 +59,7 @@ function getBooks() {
 
     if (!value) {
         content.books = [];
-        renderStatus('Enter a query', 'empty');
+        showPlaceholder();
         return;
     }
 
@@ -97,6 +97,11 @@ function getBooks() {
 function showLoader() {
     elements.loader.classList.add('is-visible');
     elements.contentContainer.replaceChildren(elements.loader);
+}
+
+function showPlaceholder() {
+    elements.loader.classList.remove('is-visible');
+    elements.contentContainer.replaceChildren(elements.placeholder);
 }
 
 function renderStatus(message, state) {
