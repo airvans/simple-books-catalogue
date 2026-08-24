@@ -30,6 +30,12 @@
 
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -37,11 +43,21 @@ body {
 }
 
 h1,
-h2,
-h3,
-h4 {
+h2{
   color: var(--text-h);
   font-family: var(--font-headline);
+}
+
+h3,
+h4,
+h5{
+  color: var(--text-h);
+  font-family: var(--font-body);
+  /* font-style: italic;
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-size: xx-large; */
 }
 
 button,
@@ -52,11 +68,10 @@ input {
 header {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
-  padding: 2px;
+  padding: 3px;
 }
 
 h1,
@@ -80,13 +95,16 @@ button {
 
 header div {
   display: flex;
-  border: var(--border);
+  align-items: center;
   gap: 0.25rem;
 }
 
 header h4 {
   display: none;
-
+  font-style:italic;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size:small;
   @media (width >=48rem) {
     display: block;
   }
@@ -98,12 +116,36 @@ header h4 {
 
 #hero-section {
   text-align: center;
+  margin-block:5rem;
+  width: 100%;
+}
+
+#hero-section h1{
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.98;
+}
+
+#hero-section h4{
+  font-weight: 300;
+  font-size:small; 
+  margin-top: 1rem;
 }
 
 #input-container {
   display: flex;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
+  padding:0.1rem;
+  font-weight: 300;
+  font-size:larger;
+  margin-bottom: 1.25rem;
+
+  @media (width >=48rem) {
+    gap: 0.25rem;
+    font-size:small;
+  }
+
 }
 
 #input-container input {
@@ -119,23 +161,37 @@ header h4 {
   border: 0px;
 }
 
+.search-img{
+  display: block;
+  @media (width >=48rem) {
+    display: none;
+  }
+}
+.search-word{
+  display:none;
+  @media (width >=48rem) {
+    display: block;
+  }
+}
+
 #input-container button:active {
   scale: 95%;
 }
 
 #content-container {
-  display: flex;
+  display:flex;
   flex-direction: column-reverse;
   gap: 0.25rem;
-
+ 
   @media (width >=48rem) {
     flex-direction: row;
+    padding:0.5rem;
   }
 }
 
 #content {
-  display: grid;
-  width: 100%;
+  display:grid;
+  flex-grow: 1;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-template-rows: repeat(2, minmax(250px, 1fr));
   grid-auto-rows: minmax(250px, 1fr);
@@ -149,12 +205,19 @@ header h4 {
 }
 
 aside {
-  width: 100%;
   max-width: 25rem;
+  flex-grow: 1;
   height: fit-content;
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
+  padding: 0.25rem;
+}
+
+aside h3{
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size:medium; 
 }
 
 #loader {
@@ -172,6 +235,7 @@ aside {
 
 #placeholder {
   display:flex;
+  gap:0.25rem;
   flex-direction:column;
   justify-content: center;
   align-items: center;
@@ -179,19 +243,34 @@ aside {
   grid-row: 1 / -1;
 }
 
+#placeholder h3{
+  font-weight: 100;
+  font-size: small;
+  @media (width >=48rem) {
+  font-size: x-small;
+  }
+}
+
 #placeholder h4{
   display:none;
-
+  font-size: small;
+  font-weight: 800;
+  
   @media (width >=48rem) {
   display:block;
   }
 }
 
 footer{
+  display: block;
   text-align: center;
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
+  font-weight: 300;
+  font-size: small;
+  padding-block:0.75rem;
+  margin-top:1rem;
 }
 
 .card{
@@ -202,6 +281,18 @@ footer{
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
+}
+
+.card P{
+  font-weight: 300;
+  font-size: x-small;
+  margin-inline: 0.25rem; 
+}
+
+.card h3{
+  font-weight: 300;
+  font-size: medium; 
+  margin-inline: 0.25rem; 
 }
 
 .card button{
@@ -221,17 +312,18 @@ footer{
 }
 
 #favourites{
-  padding: 0.25rem;
+  margin-top: 0.25rem;;
 }
 
 #favourites li{
-  padding-block:0.25rem;
+  margin-block:0.2rem;
 }
 
 .favourite-card{
   display:flex;
   justify-content:space-between;
   align-items: center;
+  padding:0.15rem;
   gap:0.25rem;
   border: var(--border);
   border-width: var(--bg-width);
@@ -250,6 +342,7 @@ footer{
 
 .favouritecontentcontainer{
   display:flex;
+  align-items: center;
   gap:0.25rem;
 }
 
@@ -257,4 +350,14 @@ footer{
     object-fit: cover;
     width: 2.5rem;
     height: 2.5rem;
+}
+
+.favouritecontentcontainer h3{
+  font-weight: 300;
+  font-size: small;
+}
+
+.favouritecontentcontainer p{
+  font-weight: 300;
+  font-size: x-small;
 }
