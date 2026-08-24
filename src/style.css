@@ -15,8 +15,7 @@
   --social-bg: rgba(216, 208, 196, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+html[data-theme="dark"] {
     --text: #bcb3a8;
     --text-h: #f4eee5;
     --bg: #24221f;
@@ -26,8 +25,6 @@
     --accent-bg: rgba(225, 123, 93, 0.18);
     --accent-border: rgba(225, 123, 93, 0.65);
     --social-bg: rgba(81, 74, 66, 0.5);
-  }
-
 }
 
 html,

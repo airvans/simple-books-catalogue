@@ -2,6 +2,7 @@
 const content = {
     books: [],
     favourites: [],
+    theme:null
 }
 
 const elements = {
@@ -17,16 +18,38 @@ const elements = {
 function binders() {
 
     elements.searchButton.addEventListener('click', getBooks);
+    
 
     const debouncedGetBooks = debounce(getBooks);
 
 
-    // elements.searchInput.addEventListener('input', (event) => {
-    //     console.log(event.target.value);
-    //     debouncedGetBooks();
-    //     console.log();
+    elements.searchInput.addEventListener('input', (event) => {
+        console.log(event.target.value);
+        debouncedGetBooks();
+        console.log();
+    })
 
-    // })
+    elements.themetoggle.addEventListener('change',()=>{
+       Theme() 
+    })
+}
+
+function Theme() {
+
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    
+    const initialTheme = savedTheme || systemTheme;
+
+    content.theme = elements.themetoggle.checked ? 'dark' : 'light'
+
+    applyTheme(content.theme);
+
+    localStorage.setItem('theme', content.theme);
+}
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
 }
 
 
@@ -215,6 +238,7 @@ function debounce(func, timeout = 300){
 function init() {
     binders();
     loadFavourites()
+    Theme()
 }
 
 init();
