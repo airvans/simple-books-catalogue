@@ -213,6 +213,26 @@ header h4 {
   }
 }
 
+.status {
+  display: flex;
+  min-height: 13rem;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / -1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.status h3 {
+  color: var(--text);
+  font-size: small;
+  font-weight: 300;
+}
+
+.status-error h3 {
+  color: var(--accent);
+}
+
 aside {
   max-width: 25rem;
   flex-grow: 1;
@@ -235,6 +255,10 @@ aside h3{
   align-items: center;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
+}
+
+#loader.is-visible {
+  display: flex;
 }
 
 #loader div {

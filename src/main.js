@@ -11,6 +11,7 @@ const elements = {
     favouritesContainer: document.querySelector('#favourites'),
     loader:document.querySelector('#loader'),
     placeholder:document.querySelector('#placeholder'),
+    themetoggle:document.querySelector('#theme-toggle'),
 };
 
 function binders() {
@@ -33,15 +34,23 @@ function getBooks() {
 
     let value = elements.searchInput.value.trim();
 
-    console.log(encodeURIComponent(value));
+    if (!value) {
+        content.books = [];
+        renderStatus('Enter a query', 'empty');
+        return;
+    }
 
     const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(value)}&limit=10`;
 
-    elements.placeholder.classList.add("hidden")
-    elements.loader.classList.remove("hidden")
+    showLoader();
 
     fetch(url)
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         let base = Array.isArray(data.docs) ? data.docs : [];
 
@@ -54,16 +63,38 @@ function getBooks() {
 
         renderBooks();
     })
-    .catch(error => console.error('Error:', error))
-    .finally(() => {
-        elements.loader.classList.add("hidden")
+    .catch(error => {
+        console.error('Error:', error);
+        content.books = [];
+        renderStatus('Unable to load books. Please try again.', 'error');
     });
 
+}
+
+function showLoader() {
+    elements.loader.classList.add('is-visible');
+    elements.contentContainer.replaceChildren(elements.loader);
+}
+
+function renderStatus(message, state) {
+    const status = document.createElement('article');
+    const statusMessage = document.createElement('h3');
+
+    elements.loader.classList.remove('is-visible');
+    status.className = `status status-${state}`;
+    statusMessage.textContent = message;
+    status.appendChild(statusMessage);
+    elements.contentContainer.replaceChildren(status);
 }
 
 function renderBooks() {
     const container = elements.contentContainer;
     container.innerHTML = '';
+
+    if (!content.books.length) {
+        renderStatus('No books found for that query.', 'empty');
+        return;
+    }
 
     content.books.forEach(book => {
         const bookElement = bookcardfactory(book.title, book.author, book.first_publish_year, book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : null);
@@ -115,7 +146,7 @@ function favouritescardfactory(id,title, author, cover) {
     favouriteElement.className = 'favourite-card';
     favouritecontentcontainer.className = 'favouritecontentcontainer';
     favouriteIcon.className = 'favourite-icon';
-    favouriteIcon.src = './src/assets/heart.svg';
+    favouriteIcon.src = './src/assets/bin.svg';
     favouriteIcon.alt = 'Remove from favourites';
 
     favouriteRemoveButton.addEventListener('click', removeFromFavourites);
