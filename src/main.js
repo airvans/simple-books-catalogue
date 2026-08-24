@@ -9,6 +9,8 @@ const elements = {
     searchButton: document.querySelector('#search-button'),
     contentContainer: document.querySelector('#content'),
     favouritesContainer: document.querySelector('#favourites'),
+    loader:document.querySelector('#loader'),
+    placeholder:document.querySelector('#placeholder'),
 };
 
 function binders() {
@@ -35,6 +37,9 @@ function getBooks() {
 
     const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(value)}&limit=10`;
 
+    elements.placeholder.classList.add("hidden")
+    elements.loader.classList.remove("hidden")
+
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -46,9 +51,12 @@ function getBooks() {
             first_publish_year: book.first_publish_year || 'Unknown Year',
             cover_id: book.cover_i || null,
         }));
-    })
-    .catch(error => console.error('Error:', error)).finally(() => {
+
         renderBooks();
+    })
+    .catch(error => console.error('Error:', error))
+    .finally(() => {
+        elements.loader.classList.add("hidden")
     });
 
 }

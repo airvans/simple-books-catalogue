@@ -27,8 +27,8 @@
   display: none;
 }
 
-.md{
-  @media (width >= 48rem /* 768px */) {
+/* .md{
+  @media (width >= 48rem) {
 
   }
-}
+} */
