@@ -25,6 +25,10 @@ html[data-theme="dark"] {
     --accent-bg: rgba(225, 123, 93, 0.18);
     --accent-border: rgba(225, 123, 93, 0.65);
     --social-bg: rgba(81, 74, 66, 0.5);
+
+    .theme-toggle-lable img {
+      content: url("/moon-dark.svg");
+   }
 }
 
 html,
