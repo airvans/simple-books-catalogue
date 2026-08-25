@@ -327,6 +327,15 @@ footer{
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
+  scale: 100%;
+  opacity:1;
+  transition: all 0.7s;
+  transition-delay: calc(sibling-index() * 0.1s);
+
+  @starting-style{
+    opacity:0;
+    scale:80%;
+  }
 }
 
 .card P{
@@ -384,12 +393,23 @@ footer{
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
+  opacity:1;
+  transform: translateX(0px);
+  transition:opacity 0.7s;
+
+  @starting-style{
+    opacity:0;
+  }
 }
 
 .favourite-card button{
+    opacity:0;
     width: 1.5rem;
     height: 1.5rem;
-    background-color: dodgerblue;
+}
+
+.favourite-card:hover button{
+  opacity:100;
 }
 
 .favourite-card button :active{
