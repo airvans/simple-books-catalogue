@@ -1,3 +1,4 @@
+/* Typography and theme tokens. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
 :root {
@@ -31,6 +32,7 @@ html[data-theme="dark"] {
    }
 }
 
+/* Reset and shared element styles. */
 html,
 body {
   margin: 0;
@@ -66,6 +68,7 @@ input {
   font: inherit;
 }
 
+/* Header and theme switch. */
 header {
   display: flex;
   justify-content: space-between;
@@ -134,6 +137,7 @@ header h4 {
   }
 }
 
+/* Search and introductory content. */
 .hidden {
   display: none;
 }
@@ -204,6 +208,7 @@ header h4 {
   scale: 95%;
 }
 
+/* Results area and responsive layout. */
 #content-container {
   display:flex;
   flex-direction: column-reverse;
@@ -230,6 +235,7 @@ header h4 {
   }
 }
 
+/* Loading, placeholder, and request status states. */
 .status {
   display: flex;
   min-height: 13rem;
@@ -311,6 +317,7 @@ aside summary{
   }
 }
 
+/* Footer. */
 footer{
   display: block;
   text-align: center;
@@ -323,6 +330,7 @@ footer{
   margin-top:1rem;
 }
 
+/* Search-result cards. */
 .card{
   position: relative;
   display:flex;
@@ -380,6 +388,7 @@ footer{
   object-fit: contain;
 }
 
+/* Saved-favourite cards. */
 #favourites{
   margin-top: 0.25rem;;
 }

@@ -1,10 +1,11 @@
-
+// Application state shared by the search, theme, and favourites features.
 const content = {
     books: [],
     favourites: [],
     theme:null
 }
 
+//the DOM elements used by the application.
 const elements = {
     searchInput: document.querySelector('#search-input'),
     searchButton: document.querySelector('#search-button'),
@@ -16,7 +17,7 @@ const elements = {
 };
 
 function binders() {
-
+    // Connect controls to their event handlers.
     elements.searchButton.addEventListener('click', getBooks);
     
 
@@ -35,7 +36,7 @@ function binders() {
 }
 
 function Theme() {
-
+    // Use the saved preference or system preference as the initial theme.
     const savedTheme = localStorage.getItem('theme');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     
@@ -52,7 +53,7 @@ function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 }
 
-
+// Fetch and normalize books returned by Open Library.
 function getBooks() {
 
     let value = elements.searchInput.value.trim();
@@ -130,6 +131,7 @@ function renderBooks() {
     });
 }
 
+// Restore favourites saved during an earlier visit.
 function loadFavourites() {
     content.favourites = JSON.parse(localStorage.getItem('favourites')) || [];
     content.favourites.forEach(fav => {
@@ -159,6 +161,7 @@ function removeFromFavourites(event) {
     favouriteCard.parentElement.remove();
 }
 
+// Build one saved-favourite item and its remove control.
 function favouritescardfactory(id,title, author, cover) {
 
     const favouritecontainer = document.createElement('li');
@@ -200,6 +203,7 @@ function favouritescardfactory(id,title, author, cover) {
 }
 
 
+// Build one search-result card and its add-to-favourites control.
 function bookcardfactory(title, author, year, cover) {
     const bookElement = document.createElement('article');
     const favouriteButton = document.createElement('button');
@@ -234,6 +238,7 @@ function bookcardfactory(title, author, year, cover) {
     return bookElement;
 }
 
+// Delay search requests until the user pauses typing.
 function debounce(func, timeout = 300){
   let timer;
   return (...args) => {
@@ -243,6 +248,7 @@ function debounce(func, timeout = 300){
 }
 
 function init() {
+    // Restore saved data and initialize the page controls.
     binders();
     loadFavourites()
     Theme()
