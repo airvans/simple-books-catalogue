@@ -88,10 +88,6 @@ function filterByAuthor(valuelemnt){
 
 }
 
- function clearFilter(){
-    renderBooks();
- }
-
 // Fetch and normalize books returned by Open Library.
 function getBooks() {
 
