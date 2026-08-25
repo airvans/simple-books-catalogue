@@ -184,7 +184,7 @@ function favouritescardfactory(id,title, author, cover) {
 
     favouriteTitle.textContent = title;
     favouriteAuthor.textContent = author;
-    favouriteImage.src = cover || './src/assets/No_Image.jpg';
+    favouriteImage.src = cover || './No_Image.jpg';
 
     favouritesubcontentcontainer.appendChild(favouriteTitle);
     favouritesubcontentcontainer.appendChild(favouriteAuthor);
