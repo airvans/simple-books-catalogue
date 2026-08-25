@@ -183,6 +183,8 @@ header h4 {
   padding: 0.25rem;
   width: 100%;
   max-width: 37.5rem;
+  anchor-name: --filter-me;
+
 }
 
 #input-container button {
@@ -215,6 +217,7 @@ header h4 {
   flex-direction: column-reverse;
   gap: 0.25rem;
   padding:0.12rem;
+  margin-top:2rem;
 
  
   @media (width >=48rem) {
@@ -453,4 +456,50 @@ footer{
 .favouritecontentcontainer p{
   font-weight: 300;
   font-size: x-small;
+}
+
+.popup{
+  padding:1rem;
+}
+
+#filterpop-up{
+  padding:0.51rem;
+  gap:0.25rem;
+  flex-direction:column;
+  background-color: var(--code-bg);
+  border: var(--border);
+  border-width: var(--bg-width);
+  border-style: solid;
+  font-weight: 300;
+  font-size:small;  
+}
+
+#filterpop-up:popover-open{
+  display: flex;
+}
+
+#filterpop-up input{
+  padding-block:0.51rem;
+  margin-bottom:0.25rem;
+}
+
+#filterpop-up button{
+  padding-block:0.51rem;
+  background-color: var(--accent);
+  color: var(--text-h);
+}
+
+#filter-button{
+  position: absolute;
+  position-anchor:--filter-me;
+  top:anchor(bottom);
+  left: anchor(left);
+  font-weight: 300;
+  font-size:small;
+  margin:0.25rem;
+  color: var(--accent);
+}
+
+#filterpop-up button:active {
+  scale: 95%;
 }

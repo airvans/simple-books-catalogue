@@ -36,7 +36,13 @@
           <img src="./src/assets/search.svg" alt="search icon" class="search-img">
         </button>
        </div>
+       <button id="filter-button" popovertarget="filterpop-up">Filter By Author</button>
       </section>
+      <div id="filterpop-up" popover="auto">
+             <label>Author is ?</label>
+             <input id="filterInput" type="text" placeholder="authors name">
+             <button id="filtersearch" popovertarget="filterpop-up" popovertargetaction="hide">Save</button>
+      </div>
       <section id="content-container">
         <section id="content">
           <div id="loader">

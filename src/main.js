@@ -14,6 +14,8 @@ const elements = {
     loader:document.querySelector('#loader'),
     placeholder:document.querySelector('#placeholder'),
     themetoggle:document.querySelector('#theme-toggle'),
+    filterInput:document.querySelector('#filterInput'),
+    filterSearchButton:document.querySelector('#filtersearch'),
 };
 
 function binders() {
@@ -32,6 +34,10 @@ function binders() {
 
     elements.themetoggle.addEventListener('change',()=>{
        Theme() 
+    })
+
+    elements.filterSearchButton.addEventListener('click',()=>{
+        filterByAuthor(elements.filterInput)
     })
 }
 
@@ -52,6 +58,40 @@ function Theme() {
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 }
+
+function filterByAuthor(valuelemnt){
+
+     let value = valuelemnt.value.trim();
+
+     const filteredBooks = content.books.map((data)=>{
+         if(data.author === value){
+             return data
+         }
+     })
+
+     console.log(filteredBooks.length)
+
+     if(filteredBooks.length < 1){
+
+        renderStatus('Unable to find books. Please try again.', 'error')
+
+        return
+     }
+
+      const container = elements.contentContainer;
+      container.innerHTML = '';
+
+    
+       filteredBooks.forEach(book => {
+        const bookElement = bookcardfactory(book.title, book.author, book.first_publish_year, book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : null);
+        container.appendChild(bookElement);
+       });
+
+}
+
+ function clearFilter(){
+    renderBooks();
+ }
 
 // Fetch and normalize books returned by Open Library.
 function getBooks() {
