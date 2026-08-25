@@ -57,6 +57,7 @@ function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 }
 
+//filtering the result by author 
 function filterByAuthor(valuelemnt){
 
      let value = valuelemnt.value.trim();
