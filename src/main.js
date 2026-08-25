@@ -27,9 +27,7 @@ function binders() {
 
 
     elements.searchInput.addEventListener('input', (event) => {
-        console.log(event.target.value);
         debouncedGetBooks();
-        console.log();
     })
 
     elements.themetoggle.addEventListener('change',()=>{
@@ -63,15 +61,16 @@ function filterByAuthor(valuelemnt){
 
      let value = valuelemnt.value.trim();
 
-     const filteredBooks = content.books.map((data)=>{
-         if(data.author === value){
+    
+     const filteredBooks = content.books.filter((data)=>{
+         if(data.author.includes(value)){
+             console.log(data)
              return data
          }
      })
 
-     console.log(filteredBooks.length)
 
-     if(filteredBooks.length < 1){
+     if(filteredBooks.length < 1 || !value){
 
         renderStatus('Unable to find books. Please try again.', 'error')
 
