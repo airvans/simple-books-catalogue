@@ -149,12 +149,14 @@ function addToFavourites(id, title, author, cover) {
 
 function removeFromFavourites(event) {
 
-    const id = event.target.parentElement.dataset.id;
-    console.log('Removing favourite with id:', id);
+    const removeButton = event.currentTarget;
+    const favouriteCard = removeButton.closest('.favourite-card');
+    const id = favouriteCard.dataset.id;
+
     content.favourites = content.favourites.filter(fav => fav.id !== id);
     localStorage.setItem('favourites', JSON.stringify(content.favourites));
 
-    event.target.parentElement.remove();
+    favouriteCard.parentElement.remove();
 }
 
 function favouritescardfactory(id,title, author, cover) {
