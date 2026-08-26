@@ -72,11 +72,13 @@ input {
 header {
   display: flex;
   justify-content: space-between;
+  padding: 3px;
+  padding-inline: 10px;
+  @media (width >=48rem) {
   border: var(--border);
   border-width: var(--bg-width);
   border-style: solid;
-  padding: 3px;
-  padding-inline: 10px;
+  }
 }
 
 h1,
