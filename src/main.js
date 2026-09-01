@@ -176,7 +176,24 @@ function loadFavourites() {
     });
 }
 
+function shakeanimation(element) {
+    element.classList.add('shake');
+    
+    const handleAnimationEnd = () => {
+        element.classList.remove('shake');
+        element.removeEventListener('animationend', handleAnimationEnd);
+    }
+
+    element.addEventListener('animationend', handleAnimationEnd);
+}
+
 function addToFavourites(id, title, author, cover) {
+
+    if(content.favourites.find(fav => fav.cover === cover)){
+        const existingFavourite = elements.favouritesContainer.querySelector(`img[src="${cover}"]`)?.closest('.favourite-card');
+        shakeanimation(existingFavourite);
+        return;
+    }
 
     content.favourites.push({ id, title, author, cover });
     localStorage.setItem('favourites', JSON.stringify(content.favourites));
