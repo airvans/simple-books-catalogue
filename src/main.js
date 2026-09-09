@@ -39,13 +39,21 @@ function binders() {
     })
 }
 
-function Theme() {
-    // Use the saved preference or system preference as the initial theme.
+function starttheme(){
+
     const savedTheme = localStorage.getItem('theme');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     
     const initialTheme = savedTheme || systemTheme;
 
+    applyTheme(initialTheme);
+
+    initialTheme === 'dark' ? elements.themetoggle.checked = true : elements.themetoggle.checked = false;
+
+}
+
+
+function Theme() {
     content.theme = elements.themetoggle.checked ? 'dark' : 'light'
 
     applyTheme(content.theme);
@@ -304,7 +312,7 @@ function init() {
     // Restore saved data and initialize the page controls.
     binders();
     loadFavourites()
-    Theme()
+    starttheme()
 }
 
 init();
